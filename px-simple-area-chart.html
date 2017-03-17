@@ -24,7 +24,7 @@ Creates a simple stacked area chart
 ##### Usage
 
     <px-simple-area-chart
-        >
+        chart-data="[[chartData]]">
     </px-simple-area-chart>
 
 @element px-simple-area-chart
@@ -198,9 +198,15 @@ Creates a simple stacked area chart
     _computeStack: function() {
       if(this._doesObjHaveValues(this.completeSeriesConfig) && this._doesObjHaveValues(this.chartData)) {
         var stack = Px.d3.stack(),
-            keys = Object.keys(this.completeSeriesConfig);
+            seriesKeys = Object.keys(this.completeSeriesConfig),
+            seriesYs = [];
 
-        stack.keys(keys);
+        for(var i = 0; i < seriesKeys.length; i++) {
+          var k = seriesKeys[i];
+          seriesYs.push(this.completeSeriesConfig[k]['y']);
+        }
+
+        stack.keys(seriesYs);
 
         return stack(this.chartData);
       }
@@ -230,7 +236,7 @@ Creates a simple stacked area chart
           var k = keys[j];
           max += maxes[k];
         }
-        console.log(max)
+
         return {
           "x": [this.dataExtents.x[0], this.dataExtents.x[1]],
           "y": [0, max]
