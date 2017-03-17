@@ -1,0 +1,38 @@
+{
+  "name": "px-simple-area-chart",
+  "version": "0.0.1",
+  "main": [
+    "px-simple-area-chart.html"
+  ],
+  "ignore": [
+    ".*",
+    "npm-debug.log",
+    "gulpfile.js",
+    "sass",
+    "bower_components",
+    "node_modules",
+    "test",
+    "OSS_Notice.pdf",
+    "scripts",
+    ".github",
+    "px-simple-area-chart.png",
+    "LICENSE.md",
+    "CONTRIBUTING.md",
+    "HISTORY.md",
+    "README.md",
+    ".jshintrc",
+    ".editorconfig",
+    "*.enc"
+  ],
+  "dependencies": {
+    "polymer": "^1.7.1",
+    "px-theme": "^2.0.3",
+    "px-vis": "~1.1.0"
+  },
+  "devDependencies": {
+    "px-layout-design": "^0.4.3",
+    "px-starter-kit-design": "^0.7.3",
+    "px-demo": "^1.3.2",
+    "iron-ajax": "~1.4.3"
+  }
+}

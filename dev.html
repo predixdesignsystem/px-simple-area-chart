@@ -1,0 +1,61 @@
+<!doctype html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>px-simple-area-chart Demo</title>
+        <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
+        <script src="../webcomponentsjs/webcomponents-lite.min.js"></script>
+        <!-- Import custom element. Note: see comment about relative paths to dependencies in the *.html file referenced below -->
+
+        <link rel="import" href="../px-theme/px-theme-styles.html">
+        <!-- <link rel="import" href="../px-dark-theme/px-dark-theme-styles.html"> -->
+        <style include="px-theme-styles" is="custom-style"></style>
+
+        <link rel="import" href="px-simple-area-chart.html"/>
+        <link rel="import" href="../iron-ajax/iron-ajax.html"/>
+        <link rel="import" href="../px-vis/px-vis-data-converter.html"/>
+
+    </head>
+
+    <body style="padding:30px;">
+    <!-- <body style="padding:30px; background-color: rgb(27,42,51);"> -->
+      <template id="template" is="dom-bind">
+        <div style="width: 600px; height: 400px;">
+          <px-simple-area-chart
+            id="basicArea"
+            height="500"
+            x-axis-type="time"
+            chart-data="[[chartData]]">
+          </px-simple-area-chart>
+        </div>
+        <iron-ajax
+          url="../demo_data/single.json"
+          handle-as="json"
+          auto
+          last-response="{{chartData}}"
+          >
+        </iron-ajax>
+      </template>
+
+      <template id="template" is="dom-bind">
+        <div style="width: 600px; height: 400px; margin-top: 50px;">
+          <px-simple-area-chart
+            id="multiArea"
+            height="500"
+            x-axis-type="time"
+            chart-data="[[chartData]]">
+          </px-simple-area-chart>
+        </div>
+        <iron-ajax
+          url="../demo_data/multi.json"
+          handle-as="json"
+          auto
+          last-response="{{chartData}}"
+          >
+        </iron-ajax>
+      </template>
+
+    </body>
+</html>

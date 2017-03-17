@@ -1,0 +1,242 @@
+<!--
+    Relative paths assume component is being run from inside an app or another component, where dependencies are flat
+    siblings. When this component is run from its own repo (e.g. tests, examples), we assume the server is started with
+    'gulp serve' (or similar server setup) to enable correct finding of bower dependencies for local runs.
+-->
+<link rel="import" href="../polymer/polymer.html"/>
+
+<link rel="import" href="css/px-simple-area-chart-styles.html">
+
+<link rel="import" href="../px-vis/px-vis-behavior-common.html" />
+<link rel="import" href="../px-vis/px-vis-behavior-d3.html" />
+<link rel="import" href="../px-vis/px-vis-behavior-chart.html" />
+<link rel="import" href="../px-vis/px-vis-scale.html">
+<link rel="import" href="../px-vis/px-vis-svg.html">
+<link rel="import" href="../px-vis/px-vis-register.html"/>
+<link rel="import" href="../px-vis/px-vis-interaction-space.html"/>
+<link rel="import" href="../px-vis/px-vis-cursor.html"/>
+<link rel="import" href="../px-vis/px-vis-area-svg.html" />
+
+
+<!--
+Creates a simple stacked area chart
+
+##### Usage
+
+    <px-simple-area-chart
+        >
+    </px-simple-area-chart>
+
+@element px-simple-area-chart
+@blurb Creates a simple stacked area chart
+@homepage index.html
+@demo index.html
+-->
+
+<dom-module id="px-simple-area-chart">
+  <template>
+    <style include="px-simple-area-chart-styles"></style>
+    <div id="wrapper" class="wrapper" >
+      <px-vis-register
+        id="register"
+        chart-width="[[width]]"
+        margin="[[margin]]"
+        units="[[units]]"
+        tooltip-data="[[tooltipData]]"
+        chart-data="[[chartData]]"
+        complete-series-config="[[completeSeriesConfig]]"
+        type="horizontal"
+        x-axis-type="[[xAxisType]]"
+        y-axis-type="[[yAxisType]]"
+        disable-click>
+      </px-vis-register>
+      <px-vis-svg
+        width="[[width]]"
+        height="[[height]]"
+        margin="[[margin]]"
+        svg="{{svg}}">
+      </px-vis-svg>
+      <px-vis-scale
+        x-axis-type="[[xAxisType]]"
+        y-axis-type="[[yAxisType]]"
+        complete-series-config="[[completeSeriesConfig]]"
+        data-extents="[[_dataExtents]]"
+        width="[[width]]"
+        height="[[height]]"
+        margin="[[margin]]"
+        chart-data={{chartData}}
+        x="{{x}}"
+        y="{{y}}"
+        domain-changed="{{domainChanged}}">
+      </px-vis-scale>
+      <px-vis-area-svg
+        svg="[[layer.0]]"
+        complete-series-config="[[completeSeriesConfig]]"
+        chart-data="[[_stackedChartData]]"
+        x="[[x]]"
+        y="[[y]]"
+        domain-changed="[[domainChanged]]">
+      </px-vis-area-svg>
+      <px-vis-interaction-space
+        svg="[[layer.2]]"
+        width="[[width]]"
+        height="[[height]]"
+        margin="[[_internalMargin]]"
+        x-axis-type="[[xAxisType]]"
+        series-keys="[[_seriesKeys]]"
+        complete-series-config="[[completeSeriesConfig]]"
+        chart-data="[[chartData]]"
+        x="[[x]]"
+        y="[[y]]"
+        domain-changed="[[domainChanged]]"
+        selection-type="{{selectionType}}"
+        mouse-rect="{{mouseRect}}"
+        tooltip-data="{{tooltipData}}"
+        interaction-svg="{{interactionSvg}}"
+        extents-data="{{extentsData}}"
+        action-config="[[actionConfig]]"
+        show-tooltip="{{_computedShowTooltip}}">
+      </px-vis-interaction-space>
+      <px-vis-cursor
+        id="cursor"
+        svg="[[layer.1]]"
+        width="[[width]]"
+        height="[[height]]"
+        margin="[[margin]]"
+        horizontal-line="none"
+        circle-point="no"
+        complete-series-config="[[completeSeriesConfig]]"
+        chart-data="[[chartData]]"
+        tooltip-data="[[tooltipData]]">
+      </px-vis-cursor>
+    </div>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+
+    is: 'px-simple-area-chart',
+
+    behaviors: [
+      PxVisBehavior.baseSize,
+      PxVisBehavior.margins,
+      PxVisBehavior.dataset,
+      PxVisBehavior.axisTypes,
+      PxVisBehaviorD3.axes,
+      PxVisBehaviorD3.domainUpdate,
+      PxVisBehavior.chartExtents,
+      PxVisBehavior.dataExtents,
+      PxVisBehaviorD3.svg,
+      PxVisBehavior.commonMethods,
+      PxVisBehavior.tooltipData,
+      PxVisBehaviorChart.registerConfigs,
+      PxVisBehaviorChart.registerPositioning,
+      PxVisBehaviorChart.chartAutoResize,
+      PxColorsBehavior.baseColors,
+      PxColorsBehavior.dataVisColorTheming,
+      PxVisBehaviorChart.layers,
+      PxVisBehaviorChart.chartCommon,
+    ],
+
+    properties: {
+      /**
+      * The chart data after being passed through d3.stack
+      *
+      */
+      _stackedChartData: {
+        type: Array,
+        computed: '_computeStack(chartData.*, completeSeriesConfig.*)'
+      },
+
+      _dataExtents: {
+        type: Object,
+        computed: '_computeDataExt(dataExtents, completeSeriesConfig.*)'
+      }
+    },
+
+    listeners: {
+      'iron-resize': '_onIronResize'
+    },
+
+    observers: [
+      '_registerConfigChanged(registerConfig.*)'
+    ],
+
+    ready: function() {
+      this.set('numberOfLayers', 3);
+
+      this.includeAllSeries = true;
+    },
+
+    _onIronResize: function() {
+      if(this.preventResize) {
+        return;
+      }
+      this.debounce('ironresize', function() {
+        var wrapperRect = this.$.wrapper.getBoundingClientRect(),
+            registerRect = this.$.register.getBoundingClientRect(),
+            widthDeduct = 0,
+            heightDeduct = 0;
+
+        heightDeduct += registerRect.height;
+
+        this.set('width', Math.max(wrapperRect.width - widthDeduct, 0));
+        this.set('height', Math.max(wrapperRect.height - heightDeduct, 0));
+      },50);
+    },
+
+    _registerConfigChanged: function(conf) {
+      this._applyConfigToElement(this.registerConfig, this.$.register);
+    },
+
+    /**
+    * Handles click on the element defined in 'on-click' on the template.
+    *
+    * @method handleClick
+    */
+    _computeStack: function() {
+      if(this._doesObjHaveValues(this.completeSeriesConfig) && this._doesObjHaveValues(this.chartData)) {
+        var stack = Px.d3.stack(),
+            keys = Object.keys(this.completeSeriesConfig);
+
+        stack.keys(keys);
+
+        return stack(this.chartData);
+      }
+    },
+
+    _computeDataExt: function(dataExtents) {
+      if(this.completeSeriesConfig) {
+        var maxes = {},
+            max = 0;
+
+        keys = Object.keys(this.completeSeriesConfig);
+
+        for(var j=0; j<keys.length; j++) {
+          var k = keys[j];
+          maxes[k] = -Infinity;
+        }
+
+        for(var i=0; i<this.chartData.length; i++) {
+          for(var j=0; j<keys.length; j++) {
+            var k = keys[j],
+                y = this.completeSeriesConfig[k]['y'];
+            maxes[k] = Math.max(maxes[k], this.chartData[i][y]);
+          }
+        }
+
+        for(var j=0; j<keys.length; j++) {
+          var k = keys[j];
+          max += maxes[k];
+        }
+        console.log(max)
+        return {
+          "x": [this.dataExtents.x[0], this.dataExtents.x[1]],
+          "y": [0, max]
+        };
+
+      }
+    }
+  });
+</script>
