@@ -31,7 +31,15 @@ Second, import the component to your application with the following tag in your 
 Finally, use the component in your application:
 
 ```
-Insert Your demo code here.
+<px-simple-area-chart
+          prevent-resize="[[props.preventResize.value]]"
+          width="[[props.width.value]]"
+          height="[[props.height.value]]"
+          x-axis-type="[[props.xAxisType.value]]"
+          chart-data="[[props.chartData.value]]"
+          series-config="[[props.seriesConfig.value]]"
+          >
+        </px-simple-area-chart>
 ```
 
 <br />
