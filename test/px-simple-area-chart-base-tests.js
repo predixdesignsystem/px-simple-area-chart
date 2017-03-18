@@ -190,7 +190,10 @@ function runBaseTests() {
       assert.isTrue(Polymer !== null);
     });
     test('px-simple-area-chart fixture is created', function() {
-      assert.isTrue(document.getElementById('px_simple_area_chart_1') !== null);
+      assert.isTrue(document.getElementById('basicArea') !== null);
+    });
+    test('px-simple-area-chart fixture is created', function() {
+      assert.isTrue(document.getElementById('multiArea') !== null);
     });
 
   });

@@ -39,13 +39,16 @@
       </template>
 
       <template id="template" is="dom-bind">
-        <div style="width: 600px; height: 400px; margin-top: 50px;">
+        <!-- <div style="width: 600px; height: 400px; margin-top: 50px;"> -->
           <px-simple-area-chart
             id="multiArea"
+            prevent-resize
+            width="500"
+            height="400"
             x-axis-type="time"
             chart-data="[[chartData]]">
           </px-simple-area-chart>
-        </div>
+        <!-- </div> -->
         <iron-ajax
           url="../demo_data/multi.json"
           handle-as="json"

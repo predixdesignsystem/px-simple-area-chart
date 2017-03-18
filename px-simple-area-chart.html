@@ -214,27 +214,22 @@ Creates a simple stacked area chart
 
     _computeDataExt: function(dataExtents) {
       if(this.completeSeriesConfig) {
-        var maxes = {},
-            max = 0;
+        var max = 1;
 
         keys = Object.keys(this.completeSeriesConfig);
 
-        for(var j=0; j<keys.length; j++) {
-          var k = keys[j];
-          maxes[k] = -Infinity;
-        }
 
         for(var i=0; i<this.chartData.length; i++) {
+          var groupMax = 0;
+
           for(var j=0; j<keys.length; j++) {
             var k = keys[j],
                 y = this.completeSeriesConfig[k]['y'];
-            maxes[k] = Math.max(maxes[k], this.chartData[i][y]);
-          }
-        }
 
-        for(var j=0; j<keys.length; j++) {
-          var k = keys[j];
-          max += maxes[k];
+            groupMax += this.chartData[i][y];
+          }
+
+          max = Math.max(groupMax, max)
         }
 
         return {

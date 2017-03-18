@@ -1,5 +1,4 @@
-
-#px-simple-area-chart
+px-simple-area-chart
 
 ## Overview
 

@@ -24,6 +24,19 @@
   <body>
     <style include="px-theme-styles" is="custom-style"></style>
     <h3>Web Component Test : Fixture for px-simple-area-chart</h3>
-    <px-simple-area-chart id="px_simple_area_chart_1"></px-simple-area-chart>
+    <div style="width: 600px; height: 400px;">
+      <px-simple-area-chart
+        id="basicArea">
+      </px-simple-area-chart>
+    </div>
+    <div>
+      <px-simple-area-chart
+        id="multiArea"
+        prevent-resize
+        width="500"
+        height="400">
+      </px-simple-area-chart>
+    </div>
+
   </body>
 </html>
