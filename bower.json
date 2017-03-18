@@ -27,7 +27,7 @@
   "dependencies": {
     "polymer": "^1.7.1",
     "px-theme": "^2.0.3",
-    "px-vis": "^1.0.0"
+    "px-vis": "~1.1.0"
   },
   "devDependencies": {
     "px-layout-design": "^0.4.3",
