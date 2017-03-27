@@ -40,7 +40,7 @@ function runCustomTests() {
     });
 
     test('basicArea calculated height', function() {
-      assert.closeTo(Number(basicArea.height), 332.5, 2);
+      assert.closeTo(Number(basicArea.height), 332.5, 5);
     });
 
     test('basicArea generated completeSeriesConfig', function() {
@@ -142,7 +142,7 @@ function runCustomTests() {
     });
 
     test('multiArea calculated height', function() {
-      assert.closeTo(Number(multiArea.height), 400, 2);
+      assert.closeTo(Number(multiArea.height), 400, 5);
     });
 
     test('multiArea generated completeSeriesConfig', function() {
