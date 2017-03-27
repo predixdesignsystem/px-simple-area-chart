@@ -31,7 +31,7 @@ function runCustomTests() {
       basicArea.set('chartData',d);
       setTimeout(function() {
         basicArea._onIronResize();
-        setTimeout(function(){ debugger; done(); }, 500);
+        setTimeout(function(){ done(); }, 500);
       }, 50);
     });
 
@@ -40,7 +40,7 @@ function runCustomTests() {
     });
 
     test('basicArea calculated height', function() {
-      assert.equal(basicArea.height, 332.5);
+      assert.closeTo(Number(basicArea.height), 332.5, 2);
     });
 
     test('basicArea generated completeSeriesConfig', function() {
@@ -60,9 +60,41 @@ function runCustomTests() {
     });
 
     test('basicArea generated _stackedChartData', function() {
-      var path = basicArea.svg.selectAll('path.series-area').attr("d");
+      var path = basicArea.svg.selectAll('path.series-area').attr("d"),
+          re = new RegExp([
+            "M\\s?,?(\\d+)\\s?,?(\\d+)\\s?",
+            "L\\s?,?(\\d+)\\s?,?(\\d+)\\s?",
+            "L\\s?,?(\\d+)\\s?,?(\\d+)\\s?",
+            "L\\s?,?(\\d+)\\s?,?(\\d+)\\s?",
+            "L\\s?,?(\\d+)\\s?,?(\\d+)\\s?",
+            "L\\s?,?(\\d+)\\s?,?(\\d+)\\s?",
+            "L\\s?,?(\\d+)\\s?,?(\\d+)\\s?",
+            "L\\s?,?(\\d+)\\s?,?(\\d+)\\s?",
+            "L\\s?,?(\\d+)\\s?,?(\\d+)\\s?",
+            "L\\s?,?(\\d+)\\s?,?(\\d+)\\s?Z"
+          ].join('')),
+          matches = re.exec(path);
 
-      assert.equal(path.split(/[\s,]+/).join(''), 'M0299L150133L3000L450199L600133L600332L450332L300332L150332L0332Z');
+      assert.closeTo(Number(matches[1]), 0, 2);
+      assert.closeTo(Number(matches[2]), 299, 2);
+      assert.closeTo(Number(matches[3]), 150, 2);
+      assert.closeTo(Number(matches[4]), 133, 2);
+      assert.closeTo(Number(matches[5]), 300, 2);
+      assert.closeTo(Number(matches[6]), 0, 2);
+      assert.closeTo(Number(matches[7]), 450, 2);
+      assert.closeTo(Number(matches[8]), 199, 2);
+      assert.closeTo(Number(matches[9]), 600, 2);
+      assert.closeTo(Number(matches[10]), 133, 2);
+      assert.closeTo(Number(matches[11]), 600, 2);
+      assert.closeTo(Number(matches[12]), 332, 2);
+      assert.closeTo(Number(matches[13]), 450, 2);
+      assert.closeTo(Number(matches[14]), 332, 2);
+      assert.closeTo(Number(matches[15]), 300, 2);
+      assert.closeTo(Number(matches[16]), 332, 2);
+      assert.closeTo(Number(matches[17]), 150, 2);
+      assert.closeTo(Number(matches[18]), 332, 2);
+      assert.closeTo(Number(matches[19]), 0, 2);
+      assert.closeTo(Number(matches[20]), 332, 2);
     });
   });
 
@@ -110,7 +142,7 @@ function runCustomTests() {
     });
 
     test('multiArea calculated height', function() {
-      assert.equal(multiArea.height, 400);
+      assert.closeTo(Number(multiArea.height), 400, 2);
     });
 
     test('multiArea generated completeSeriesConfig', function() {
