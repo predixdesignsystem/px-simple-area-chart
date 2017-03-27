@@ -36,79 +36,82 @@ Creates a simple stacked area chart
 <dom-module id="px-simple-area-chart">
   <template>
     <style include="px-simple-area-chart-styles"></style>
-    <div id="wrapper" class="wrapper" >
-      <px-vis-register
-        id="register"
-        chart-width="[[width]]"
-        margin="[[margin]]"
-        units="[[units]]"
-        tooltip-data="[[tooltipData]]"
-        chart-data="[[chartData]]"
-        complete-series-config="[[completeSeriesConfig]]"
-        type="horizontal"
-        x-axis-type="[[xAxisType]]"
-        y-axis-type="[[yAxisType]]"
-        disable-click>
-      </px-vis-register>
-      <px-vis-svg
-        width="[[width]]"
-        height="[[height]]"
-        margin="[[margin]]"
-        svg="{{svg}}">
-      </px-vis-svg>
-      <px-vis-scale
-        x-axis-type="[[xAxisType]]"
-        y-axis-type="[[yAxisType]]"
-        complete-series-config="[[completeSeriesConfig]]"
-        data-extents="[[_dataExtents]]"
-        width="[[width]]"
-        height="[[height]]"
-        margin="[[margin]]"
-        chart-data={{chartData}}
-        x="{{x}}"
-        y="{{y}}"
-        domain-changed="{{domainChanged}}">
-      </px-vis-scale>
-      <px-vis-area-svg
-        svg="[[layer.0]]"
-        complete-series-config="[[completeSeriesConfig]]"
-        chart-data="[[_stackedChartData]]"
-        x="[[x]]"
-        y="[[y]]"
-        domain-changed="[[domainChanged]]">
-      </px-vis-area-svg>
-      <px-vis-interaction-space
-        svg="[[layer.2]]"
-        width="[[width]]"
-        height="[[height]]"
-        margin="[[_internalMargin]]"
-        x-axis-type="[[xAxisType]]"
-        series-keys="[[_seriesKeys]]"
-        complete-series-config="[[completeSeriesConfig]]"
-        chart-data="[[chartData]]"
-        x="[[x]]"
-        y="[[y]]"
-        domain-changed="[[domainChanged]]"
-        selection-type="{{selectionType}}"
-        mouse-rect="{{mouseRect}}"
-        tooltip-data="{{tooltipData}}"
-        interaction-svg="{{interactionSvg}}"
-        extents-data="{{extentsData}}"
-        action-config="[[actionConfig]]"
-        show-tooltip="{{_computedShowTooltip}}">
-      </px-vis-interaction-space>
-      <px-vis-cursor
-        id="cursor"
-        svg="[[layer.1]]"
-        width="[[width]]"
-        height="[[height]]"
-        margin="[[margin]]"
-        horizontal-line="none"
-        circle-point="no"
-        complete-series-config="[[completeSeriesConfig]]"
-        chart-data="[[chartData]]"
-        tooltip-data="[[tooltipData]]">
-      </px-vis-cursor>
+    <div id="wrapper" class="flex wrapper flex--left" >
+      <div class="flex flex--col" >
+        <px-vis-register
+          id="register"
+          height="50"
+          chart-width="[[width]]"
+          margin="[[margin]]"
+          units="[[units]]"
+          tooltip-data="[[tooltipData]]"
+          chart-data="[[chartData]]"
+          complete-series-config="[[completeSeriesConfig]]"
+          type="horizontal"
+          x-axis-type="[[xAxisType]]"
+          y-axis-type="[[yAxisType]]"
+          disable-click>
+        </px-vis-register>
+        <px-vis-svg
+          width="[[width]]"
+          height="[[height]]"
+          margin="[[margin]]"
+          svg="{{svg}}">
+        </px-vis-svg>
+        <px-vis-scale
+          x-axis-type="[[xAxisType]]"
+          y-axis-type="[[yAxisType]]"
+          complete-series-config="[[completeSeriesConfig]]"
+          data-extents="[[_dataExtents]]"
+          width="[[width]]"
+          height="[[height]]"
+          margin="[[margin]]"
+          chart-data={{chartData}}
+          x="{{x}}"
+          y="{{y}}"
+          domain-changed="{{domainChanged}}">
+        </px-vis-scale>
+        <px-vis-area-svg
+          svg="[[layer.0]]"
+          complete-series-config="[[completeSeriesConfig]]"
+          chart-data="[[_stackedChartData]]"
+          x="[[x]]"
+          y="[[y]]"
+          domain-changed="[[domainChanged]]">
+        </px-vis-area-svg>
+        <px-vis-interaction-space
+          svg="[[layer.2]]"
+          width="[[width]]"
+          height="[[height]]"
+          margin="[[_internalMargin]]"
+          x-axis-type="[[xAxisType]]"
+          series-keys="[[_seriesKeys]]"
+          complete-series-config="[[completeSeriesConfig]]"
+          chart-data="[[chartData]]"
+          x="[[x]]"
+          y="[[y]]"
+          domain-changed="[[domainChanged]]"
+          selection-type="{{selectionType}}"
+          mouse-rect="{{mouseRect}}"
+          tooltip-data="{{tooltipData}}"
+          interaction-svg="{{interactionSvg}}"
+          extents-data="{{extentsData}}"
+          action-config="[[actionConfig]]"
+          show-tooltip="{{_computedShowTooltip}}">
+        </px-vis-interaction-space>
+        <px-vis-cursor
+          id="cursor"
+          svg="[[layer.1]]"
+          width="[[width]]"
+          height="[[height]]"
+          margin="[[margin]]"
+          horizontal-line="none"
+          circle-point="no"
+          complete-series-config="[[completeSeriesConfig]]"
+          chart-data="[[chartData]]"
+          tooltip-data="[[tooltipData]]">
+        </px-vis-cursor>
+      </div>
     </div>
   </template>
 </dom-module>
@@ -180,6 +183,8 @@ Creates a simple stacked area chart
             heightDeduct = 0;
 
         heightDeduct += registerRect.height;
+console.warn(wrapperRect.height);
+console.warn(registerRect.height);
 
         this.set('width', Math.max(wrapperRect.width - widthDeduct, 0));
         this.set('height', Math.max(wrapperRect.height - heightDeduct, 0));

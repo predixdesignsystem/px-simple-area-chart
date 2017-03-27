@@ -29,7 +29,10 @@ function runCustomTests() {
 
     suiteSetup(function(done){
       basicArea.set('chartData',d);
-      setTimeout(function(){ done(); }, 500);
+      setTimeout(function() {
+        basicArea._onIronResize();
+        setTimeout(function(){ debugger; done(); }, 500);
+      }, 50);
     });
 
     test('basicArea calculated width', function() {
