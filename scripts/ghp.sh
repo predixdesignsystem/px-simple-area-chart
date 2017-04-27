@@ -46,7 +46,6 @@ rm *.html
 rm *.json
 rm *.enc
 rm *.js
-rm *.lock
 rm *.ico
 rm *.md
 yes | rm .travis.yml
