@@ -1,3 +1,7 @@
+v2.0.0
+==================
+* Design refresh
+
 v1.1.1
 ==================
 * Adding missing behavior
