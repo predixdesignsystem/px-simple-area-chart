@@ -1,8 +1,8 @@
-px-simple-area-chart
+# px-simple-area-chart
 
 ## Overview
 
-px-simple-area-chart is a Predix UI component
+`Px-simple-area-chart` is a Predix UI component that creates a simple stacked area chart.
 
 ## Usage
 
@@ -12,17 +12,17 @@ px-simple-area-chart is a Predix UI component
 3. bower
 4. [webcomponents-lite.js polyfill](https://github.com/webcomponents/webcomponentsjs)
 
-Node, npm and bower are necessary to install the component and dependencies. webcomponents.js adds support for web components and custom elements to your application.
+Node, npm, and bower are necessary to install the component and dependencies. webcomponents.js adds support for web components and custom elements to your application.
 
 ## Getting Started
 
-First, install the component via bower on the command line.
+First, install the component via bower on the command line:
 
 ```
 bower install px-simple-area-chart --save
 ```
 
-Second, import the component to your application with the following tag in your head.
+Second, import the component in your application with the following tag in your head:
 
 ```
 <link rel="import" href="/bower_components/px-simple-area-chart/px-simple-area-chart.html"/>
@@ -37,9 +37,8 @@ Finally, use the component in your application:
           height="[[props.height.value]]"
           x-axis-type="[[props.xAxisType.value]]"
           chart-data="[[props.chartData.value]]"
-          series-config="[[props.seriesConfig.value]]"
-          >
-        </px-simple-area-chart>
+          series-config="[[props.seriesConfig.value]]">
+</px-simple-area-chart>
 ```
 
 <br />
