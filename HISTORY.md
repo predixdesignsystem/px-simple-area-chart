@@ -1,6 +1,10 @@
+v2.0.2
+==================
+* runtime theming for demo
+
 v2.0.1
 ==================
-* fix sarfari 9 flex bug causing registers to overlap if screen is too small
+* fix safari 9 flex bug causing registers to overlap if screen is too small
 * Add hidden class for registers via sass partial
 
 v2.0.0
