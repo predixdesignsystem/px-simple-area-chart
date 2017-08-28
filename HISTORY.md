@@ -1,3 +1,7 @@
+v2.0.3
+==================
+* Fix for _dataExtents calc when val is undefined
+
 v2.0.2
 ==================
 * runtime theming for demo

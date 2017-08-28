@@ -257,9 +257,10 @@ Custom property | Description
 
           for(var j=0; j<keys.length; j++) {
             var k = keys[j],
-                y = this.completeSeriesConfig[k]['y'];
+                y = this.completeSeriesConfig[k]['y'],
+                val = this.chartData[i][y] ? this.chartData[i][y] : 0;
 
-            groupMax += this.chartData[i][y];
+            groupMax += val;
           }
 
           max = Math.max(groupMax, max)
