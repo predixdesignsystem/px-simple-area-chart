@@ -1,3 +1,7 @@
+v2.0.4
+==================
+* Update vis dependency
+
 v2.0.3
 ==================
 * Fix for _dataExtents calc when val is undefined
