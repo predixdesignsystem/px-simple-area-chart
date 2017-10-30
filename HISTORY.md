@@ -1,3 +1,7 @@
+v2.0.5
+==================
+* add device flags
+
 v2.0.4
 ==================
 * Update vis dependency
