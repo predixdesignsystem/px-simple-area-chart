@@ -220,7 +220,9 @@ Custom property | Description
     },
 
     _registerConfigChanged: function(conf) {
-      this._applyConfigToElement(this.registerConfig, this.$.register);
+      if(conf) {
+        this._applyConfigToElement(this.registerConfig, this.$.register);
+      }
     },
 
     /**
@@ -246,7 +248,7 @@ Custom property | Description
     },
 
     _computeDataExt: function(dataExtents) {
-      if(this.completeSeriesConfig) {
+      if(this.completeSeriesConfig && this._doesObjHaveValues(this.dataExtents)) {
         var max = 1;
 
         keys = Object.keys(this.completeSeriesConfig);

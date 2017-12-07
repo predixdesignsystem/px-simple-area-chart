@@ -1,11 +1,12 @@
-// This is the wrapper for custom tests, called upon web components ready state
-function runCustomTests() {
-  // Place any setup steps like variable declaration and initialization here
+document.addEventListener("WebComponentsReady", function() {
+  runCustomTests();
+});
 
-  // This is the placeholder suite to place custom tests in
-  // Use testCase(options) for a more convenient setup of the test cases
+function runCustomTests() {
+
   suite('px-simple-area-chart setting chartData draws', function() {
-    var basicArea = document.getElementById('basicArea');
+    var basicArea;
+
     var d = [{
             "x": 1397102460000,
             "y": 1
@@ -24,10 +25,9 @@ function runCustomTests() {
           }
         ];
 
-    var colorOrder = dataVisColors.properties.seriesColorOrder.value;
-    var colorSet = dataVisColors.properties.dataVisColors.value;
-
-    suiteSetup(function(done){
+    suiteSetup(function(done) {
+      basicArea = document.getElementById('basicArea');
+debugger
       basicArea.set('chartData',d);
       setTimeout(function() {
         basicArea._onIronResize();
@@ -48,7 +48,7 @@ function runCustomTests() {
       assert.equal(basicArea.completeSeriesConfig["y"]['x'], 'x');
       assert.equal(basicArea.completeSeriesConfig["y"]['y'], 'y');
       assert.equal(basicArea.completeSeriesConfig["y"]['name'], 'y');
-      assert.equal(basicArea.completeSeriesConfig["y"]['color'], colorSet[colorOrder[0]]);
+      assert.equal(basicArea.completeSeriesConfig["y"]['color'], basicArea.seriesColorList[0]);
     });
 
     test('basicArea generated _dataExtents', function() {
@@ -100,7 +100,7 @@ function runCustomTests() {
 
 
   suite('px-simple-area-chart multi area', function() {
-    var multiArea = document.getElementById('multiArea');
+    var multiArea;
     var d = [{
             "x": 1397102460000,
             "y": 1,
@@ -129,10 +129,9 @@ function runCustomTests() {
           }
         ];
 
-    var colorOrder = dataVisColors.properties.seriesColorOrder.value;
-    var colorSet = dataVisColors.properties.dataVisColors.value;
+    suiteSetup(function(done) {
+      multiArea = document.getElementById('multiArea');
 
-    suiteSetup(function(done){
       multiArea.set('chartData',d);
       setTimeout(function(){ done(); }, 500);
     });
@@ -150,19 +149,19 @@ function runCustomTests() {
       assert.equal(multiArea.completeSeriesConfig["y"]['x'], 'x');
       assert.equal(multiArea.completeSeriesConfig["y"]['y'], 'y');
       assert.equal(multiArea.completeSeriesConfig["y"]['name'], 'y');
-      assert.equal(multiArea.completeSeriesConfig["y"]['color'], colorSet[colorOrder[0]]);
+      assert.equal(multiArea.completeSeriesConfig["y"]['color'], multiArea.seriesColorList[0]);
 
       assert.equal(typeof multiArea.completeSeriesConfig["y1"], 'object');
       assert.equal(multiArea.completeSeriesConfig["y1"]['x'], 'x');
       assert.equal(multiArea.completeSeriesConfig["y1"]['y'], 'y1');
       assert.equal(multiArea.completeSeriesConfig["y1"]['name'], 'y1');
-      assert.equal(multiArea.completeSeriesConfig["y1"]['color'], colorSet[colorOrder[1]]);
+      assert.equal(multiArea.completeSeriesConfig["y1"]['color'], multiArea.seriesColorList[1]);
 
       assert.equal(typeof multiArea.completeSeriesConfig["y2"], 'object');
       assert.equal(multiArea.completeSeriesConfig["y2"]['x'], 'x');
       assert.equal(multiArea.completeSeriesConfig["y2"]['y'], 'y2');
       assert.equal(multiArea.completeSeriesConfig["y2"]['name'], 'y2');
-      assert.equal(multiArea.completeSeriesConfig["y2"]['color'], colorSet[colorOrder[2]]);
+      assert.equal(multiArea.completeSeriesConfig["y2"]['color'], multiArea.seriesColorList[2]);
     });
 
     test('multiArea generated _dataExtents', function() {
@@ -178,6 +177,7 @@ function runCustomTests() {
 
     test('multiArea generated _stackedChartData', function() {
       // just check the first
+      debugger
       var path = multiArea.svg.select('path.series-area').attr("d");
 
       assert.equal(path.split(/[\s,]+/).join(''), 'M0388L125331L250285L375354L500331L500400L375400L250400L125400L0400Z');
@@ -186,7 +186,7 @@ function runCustomTests() {
 
 
   suite('px-simple-area-chart with seriesConfig', function() {
-    var multiArea = document.getElementById('multiArea');
+    var multiArea;
     var sc = {
           "fistSeries":{
             "name":"First",
@@ -208,10 +208,9 @@ function runCustomTests() {
           }
         };
 
-    var colorOrder = dataVisColors.properties.seriesColorOrder.value;
-    var colorSet = dataVisColors.properties.dataVisColors.value;
+    suiteSetup(function(done ){
+      multiArea = document.getElementById('multiArea');
 
-    suiteSetup(function(done){
       multiArea.set('seriesConfig',sc);
       setTimeout(function(){ done(); }, 500);
     });
@@ -229,21 +228,21 @@ function runCustomTests() {
       assert.equal(multiArea.completeSeriesConfig["fistSeries"]['x'], 'x');
       assert.equal(multiArea.completeSeriesConfig["fistSeries"]['y'], 'y');
       assert.equal(multiArea.completeSeriesConfig["fistSeries"]['name'], 'First');
-      assert.equal(multiArea.completeSeriesConfig["fistSeries"]['color'], colorSet[colorOrder[0]]);
+      assert.equal(multiArea.completeSeriesConfig["fistSeries"]['color'], multiArea.seriesColorList[0]);
       assert.equal(multiArea.completeSeriesConfig["fistSeries"]['yAxisUnit'], 'bofs');
 
       assert.equal(typeof multiArea.completeSeriesConfig["secondSeries"], 'object');
       assert.equal(multiArea.completeSeriesConfig["secondSeries"]['x'], 'x');
       assert.equal(multiArea.completeSeriesConfig["secondSeries"]['y'], 'y1');
       assert.equal(multiArea.completeSeriesConfig["secondSeries"]['name'], 'Second');
-      assert.equal(multiArea.completeSeriesConfig["secondSeries"]['color'], colorSet[colorOrder[1]]);
+      assert.equal(multiArea.completeSeriesConfig["secondSeries"]['color'], multiArea.seriesColorList[1]);
       assert.equal(multiArea.completeSeriesConfig["secondSeries"]['yAxisUnit'], 'bofs');
 
       assert.equal(typeof multiArea.completeSeriesConfig["thirdSeries"], 'object');
       assert.equal(multiArea.completeSeriesConfig["thirdSeries"]['x'], 'x');
       assert.equal(multiArea.completeSeriesConfig["thirdSeries"]['y'], 'y2');
       assert.equal(multiArea.completeSeriesConfig["thirdSeries"]['name'], 'Third');
-      assert.equal(multiArea.completeSeriesConfig["thirdSeries"]['color'], colorSet[colorOrder[2]]);
+      assert.equal(multiArea.completeSeriesConfig["thirdSeries"]['color'], multiArea.seriesColorList[2]);
       assert.equal(multiArea.completeSeriesConfig["thirdSeries"]['yAxisUnit'], 'bofs');
     });
 
