@@ -1,3 +1,6 @@
+==================
+* Polymer 2 hybrid
+
 v2.0.5
 ==================
 * add device flags

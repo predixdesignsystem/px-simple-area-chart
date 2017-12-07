@@ -27,7 +27,6 @@ function runCustomTests() {
 
     suiteSetup(function(done) {
       basicArea = document.getElementById('basicArea');
-debugger
       basicArea.set('chartData',d);
       setTimeout(function() {
         basicArea._onIronResize();
@@ -177,7 +176,6 @@ debugger
 
     test('multiArea generated _stackedChartData', function() {
       // just check the first
-      debugger
       var path = multiArea.svg.select('path.series-area').attr("d");
 
       assert.equal(path.split(/[\s,]+/).join(''), 'M0388L125331L250285L375354L500331L500400L375400L250400L125400L0400Z');
