@@ -18,32 +18,38 @@
     <!-- px-theme is needed for WCT to run without errors -->
     <link rel="import" href="../../px-theme/px-theme-styles.html"/>
 
+    <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
+
     <script src="px-simple-area-chart-custom-tests.js"></script>
   </head>
 
   <body>
-    <style include="px-theme-styles" is="custom-style"></style>
+    <custom-style>
+      <style include="px-theme-styles" is="custom-style"></style>
+    </custom-style>
     <h3>Web Component Test : Fixture for px-simple-area-chart</h3>
-    <template is="dom-bind">
-      <div style="width: 600px; height: 378px;">
-        <px-simple-area-chart
-          id="basicArea"
-          width="500"
-          height="400">
-        </px-simple-area-chart>
-      </div>
-    </template>
-
-    <template is="dom-bind">
-      <div>
-        <px-simple-area-chart
-          id="multiArea"
-          prevent-resize
-          width="500"
-          height="400">
-        </px-simple-area-chart>
-      </div>
-    </template>
-
+    <dom-bind>
+      <template is="dom-bind">
+        <div style="width: 600px; height: 378px;">
+          <px-simple-area-chart
+            id="basicArea"
+            width="500"
+            height="400">
+          </px-simple-area-chart>
+        </div>
+      </template>
+    </dom-bind>
+    <dom-bind>
+      <template is="dom-bind">
+        <div>
+          <px-simple-area-chart
+            id="multiArea"
+            prevent-resize
+            width="500"
+            height="400">
+          </px-simple-area-chart>
+        </div>
+      </template>
+    </dom-bind>
   </body>
 </html>
