@@ -41,7 +41,6 @@
   },
   "resolutions": {
     "webcomponentsjs": "^1.0.0",
-    "px-view-header": "^1.1.2",
     "promise-polyfill": "^2.0.0"
   },
   "variants": {
