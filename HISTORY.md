@@ -1,5 +1,6 @@
+v2.1.0
 ==================
-* Polymer 2 hybrid
+* Hybrid support: Polymer 1.X and 2.X
 
 v2.0.5
 ==================
