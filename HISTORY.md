@@ -1,3 +1,7 @@
+v2.1.1
+==================
+* Fix demo for IE
+
 v2.1.0
 ==================
 * Hybrid support: Polymer 1.X and 2.X
