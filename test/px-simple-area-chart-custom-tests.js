@@ -91,26 +91,26 @@ function runCustomTests() {
           ].join('')),
           matches = re.exec(path);
 
-      assert.closeTo(Number(matches[1]), 0, 2);
-      assert.closeTo(Number(matches[2]), 299, 2);
-      assert.closeTo(Number(matches[3]), 150, 2);
-      assert.closeTo(Number(matches[4]), 133, 2);
-      assert.closeTo(Number(matches[5]), 300, 2);
-      assert.closeTo(Number(matches[6]), 0, 2);
-      assert.closeTo(Number(matches[7]), 450, 2);
-      assert.closeTo(Number(matches[8]), 199, 2);
-      assert.closeTo(Number(matches[9]), 600, 2);
-      assert.closeTo(Number(matches[10]), 133, 2);
-      assert.closeTo(Number(matches[11]), 600, 2);
-      assert.closeTo(Number(matches[12]), 332, 2);
-      assert.closeTo(Number(matches[13]), 450, 2);
-      assert.closeTo(Number(matches[14]), 332, 2);
-      assert.closeTo(Number(matches[15]), 300, 2);
-      assert.closeTo(Number(matches[16]), 332, 2);
-      assert.closeTo(Number(matches[17]), 150, 2);
-      assert.closeTo(Number(matches[18]), 332, 2);
-      assert.closeTo(Number(matches[19]), 0, 2);
-      assert.closeTo(Number(matches[20]), 332, 2);
+      assert.closeTo(Number(matches[1]), 0, 5);
+      assert.closeTo(Number(matches[2]), 299, 5);
+      assert.closeTo(Number(matches[3]), 150, 5);
+      assert.closeTo(Number(matches[4]), 133, 5);
+      assert.closeTo(Number(matches[5]), 300, 5);
+      assert.closeTo(Number(matches[6]), 0, 5);
+      assert.closeTo(Number(matches[7]), 450, 5);
+      assert.closeTo(Number(matches[8]), 199, 5);
+      assert.closeTo(Number(matches[9]), 600, 5);
+      assert.closeTo(Number(matches[10]), 133, 5);
+      assert.closeTo(Number(matches[11]), 600, 5);
+      assert.closeTo(Number(matches[12]), 332, 5);
+      assert.closeTo(Number(matches[13]), 450, 5);
+      assert.closeTo(Number(matches[14]), 332, 5);
+      assert.closeTo(Number(matches[15]), 300, 5);
+      assert.closeTo(Number(matches[16]), 332, 5);
+      assert.closeTo(Number(matches[17]), 150, 5);
+      assert.closeTo(Number(matches[18]), 332, 5);
+      assert.closeTo(Number(matches[19]), 0, 5);
+      assert.closeTo(Number(matches[20]), 332, 5);
     });
   });
 
